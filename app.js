@@ -1,38 +1,44 @@
 const inputName = document.getElementById("name");
-const inputUserName = document.getElementById("username");
 const inputLastName = document.getElementById("lastname");
 const inputRank = document.getElementById("rank");
 const button = document.querySelector("button");
 const nobetContainer = document.querySelector(".nobet-container");
-let userName = inputUserName.value;
+let boxes = document.querySelectorAll(".box");
+
+let users = [];
+let i = 0;
 button.addEventListener("click", () => {
   if (
-    userName == "" &&
-    inputUserName.value == "" &&
     inputLastName.value == "" &&
-    inputRank.value == ""
+    inputRank.value == "" &&
+    inputName.value == ""
   ) {
     alert("Bilgileri Eksiksiz Giriniz");
   } else {
     class Person {
-      constructor(name, lastName, rank) {
+      constructor(id, name, lastName, rank) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.rank = rank;
       }
     }
-
-    const userName = new Person(
-      `${inputName.value}`,
-      `${inputLastName.value}`,
-      `${inputRank.value}`
+    users.push(
+      new Person(
+        i,
+        `${inputName.value}`,
+        `${inputLastName.value}`,
+        `${inputRank.value}`
+      )
     );
-
     const box = document.createElement("div");
     box.classList.add("box");
-    box.innerHTML = `İsim : ${userName.name}<br>
-          Soyisim : ${userName.lastName}<br>
-          Rütbe : ${userName.rank}<br>`;
+    console.log(users.length);
+    box.innerHTML = `İsim : ${users[i].name.toUpperCase()}<br>
+    Soyisim : ${users[i].lastName.toUpperCase()}<br>
+    Rütbe : ${users[i].rank.toUpperCase()}<br>`;
     nobetContainer.appendChild(box);
+    i++;
   }
+  console.log(boxes);
 });
